@@ -1,4 +1,6 @@
-"""Module to create graphs from garlicoin balances"""
+"""Module to create graphs from garlicoin balances
+WIP
+"""
 import matplotlib.pyplot as plt
 from garlicoin_balance_finder import value_dict
 
