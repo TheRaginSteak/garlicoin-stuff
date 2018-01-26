@@ -23,6 +23,8 @@ def address_to_dict():
     address_dict = {}
     with open("addresses.txt", "r") as address_file:
         for line in address_file:
+            if line[:1] == "#":
+                continue
             (key, value) = line.split()
             address_dict[key] = value
     return address_dict
