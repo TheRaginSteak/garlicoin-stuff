@@ -14,7 +14,7 @@ def get_bool(prompt):
     """A simple function to get boolean options"""
     while True:
         try:
-            return {"true":True, "false":False}[input(prompt).lower()]
+            return {"true":True, "false":False, "y":True, "n":False}[input(prompt).lower()]
         except KeyError:
             print("Invalid input")
 
@@ -84,7 +84,7 @@ def percentage_of_us(balance):
     except ZeroDivisionError:
         return 0
 
-PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (True or False) ")
+PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
 
 #def last_balance():
 
