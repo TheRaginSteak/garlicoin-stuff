@@ -9,5 +9,5 @@ def plot_bar_graph():
     names = []
     values = []
     for key, value in value_dict():
-        names.append[key.capitalize()]
+        names.append([key.capitalize()])
         values.append(value)
