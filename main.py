@@ -1,3 +1,7 @@
+"""
+Runs all the modules
+"""
+
 import garlicoin_balance_finder
 import garlicoin_grapher
 
