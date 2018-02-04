@@ -2,9 +2,7 @@
 Module to create graphs from garlicoin balances
 """
 import matplotlib.pyplot as plt
-from garlicoin_balance_finder import value_dict, get_bool
-
-CHART = get_bool("Do you want a pie chart? (Y/N) ")
+from garlicoin_balance_finder import value_dict
 
 def pie_chart():
     labels = []
@@ -35,5 +33,5 @@ def make_autopct(sizes):
         return("{p:.2f}% ({v:d})".format(p = pct, v = val))
     return my_autopct
 
-if __name__ == '__main__':
+def main():
     pie_chart()

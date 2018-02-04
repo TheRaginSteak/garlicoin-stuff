@@ -4,10 +4,6 @@ Script to find balances of garlicoin wallets and manipulate them
 import urllib.request
 import time
 
-USER_AGENT = \
-    "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
-HEADERS = {"User-Agent":USER_AGENT,}
-
 def get_bool(prompt):
     """A simple function to get boolean options"""
     while True:
@@ -16,6 +12,9 @@ def get_bool(prompt):
         except KeyError:
             print("Invalid input")
 
+USER_AGENT = \
+    "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
+HEADERS = {"User-Agent":USER_AGENT,}
 
 def url_dict():
     """Converts a file with addresses in into a dictionary"""
@@ -63,6 +62,7 @@ def record_balance(name, balance):
 
 def print_values():
     """Prints all the values for balances and Percentages"""
+    PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
     our_total = 0
     names = []
     balances = []
@@ -116,14 +116,5 @@ VALUE_DICTIONARY = value_dict()
 
 PERCENT_DICTIONARY_US = percent_dict_us()
 
-PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
-
-RECORD_TIME_FILE = get_bool("Do you want to write to a file for calculating GRLC/hr later? (Y/N) ")
-
-
 def main():
-    """Running the functions"""
     print_values()
-
-if __name__ == "__main__":
-    main()
