@@ -44,18 +44,12 @@ def value_dict():
     for key in url_dictionary:
         value_dictionary[key] = 0.0
     for key, value in url_dictionary.items():
-        if type(value) == list:
-            for i in enumerate(value):
+        for i in enumerate(value):
                 i = i[0]
                 try:
                     value_dictionary[key] += float(url_value_finder(value[i]))
                 except ValueError:
                     value_dictionary[key] = 0.0
-        else:
-            try:
-                value_dictionary[key] = float(url_value_finder(value))
-            except ValueError:
-                value_dictionary[key] = 0.0
     return value_dictionary
 
 
