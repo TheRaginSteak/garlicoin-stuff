@@ -1,6 +1,5 @@
 """
 Script to find balances of garlicoin wallets and manipulate them
-Need to create an external file to store addresses rather than store them as a constant
 """
 import urllib.request
 import time
@@ -17,6 +16,7 @@ def get_bool(prompt):
         except KeyError:
             print("Invalid input")
 
+
 def url_dict():
     """Converts a file with addresses in into a dictionary"""
     address_dict = {}
@@ -25,8 +25,10 @@ def url_dict():
             if line[:1] == "#":
                 continue
             (key, value) = line.split()
-            address_dict[key] = "https://explorer.grlc-bakery.fun/ext/getbalance/" + value
+            address_dict.setdefault(key, [])
+            address_dict[key].append("https://explorer.grlc-bakery.fun/ext/getbalance/" + value)
     return address_dict
+
 
 def url_value_finder(url):
     """Finds and returns the value of an address"""
@@ -34,18 +36,28 @@ def url_value_finder(url):
     response = urllib.request.urlopen(request)
     return response.read()
 
+
 def value_dict():
     """Creates and prints a dictionary with all the wallet balances"""
     value_dictionary = {}
-    for key, value in url_dict().items():
-        try:
-            if key in value_dictionary:
-                value_dictionary[key] += float(url_value_finder(value))
-            else:
+    url_dictionary = url_dict()
+    for key in url_dictionary:
+        value_dictionary[key] = 0.0
+    for key, value in url_dictionary.items():
+        if type(value) == list:
+            for i in enumerate(value):
+                i = i[0]
+                try:
+                    value_dictionary[key] += float(url_value_finder(value[i]))
+                except ValueError:
+                    value_dictionary[key] = 0.0
+        else:
+            try:
                 value_dictionary[key] = float(url_value_finder(value))
-        except ValueError:
-            value_dictionary[key] = 0.0
+            except ValueError:
+                value_dictionary[key] = 0.0
     return value_dictionary
+
 
 def record_balance(name, balance):
     """Records the balance into a .txt file for grlc/hr functionality"""
@@ -53,6 +65,7 @@ def record_balance(name, balance):
     with open(time.time() +" GRLC balances.txt", 'a') as time_file:
         time_file.write(person_value)
     return 1
+
 
 def print_values():
     """Prints all the values for balances and Percentages"""
@@ -69,6 +82,7 @@ def print_values():
         percentages_network = []
         for key, value in percent_dict_network().items():
             percentages_network.append(value)
+
     print("\n")
     for i in enumerate(names):
         i = i[0]
@@ -83,6 +97,7 @@ def print_values():
     print("Total garlic supply is: " + str(round(float(
         url_value_finder("https://explorer.grlc-bakery.fun/ext/getmoneysupply")), 3)))
 
+
 def percent_dict_us():
     """Creates a dictionary with the percentages of our supply"""
     percent_dictionary = {}
@@ -93,6 +108,7 @@ def percent_dict_us():
         percent_dictionary[key] = value / total_value * 100
     return percent_dictionary
 
+
 def percent_dict_network():
     """Creates a dictionary with the percentages of the network"""
     percent_dictionary = {}
@@ -101,6 +117,7 @@ def percent_dict_network():
         percent_dictionary[key] = value / float(total_value) * 100
     return percent_dictionary
 
+
 VALUE_DICTIONARY = value_dict()
 
 PERCENT_DICTIONARY_US = percent_dict_us()
@@ -108,6 +125,7 @@ PERCENT_DICTIONARY_US = percent_dict_us()
 PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
 
 RECORD_TIME_FILE = get_bool("Do you want to write to a file for calculating GRLC/hr later? (Y/N) ")
+
 
 def main():
     """Running the functions"""
