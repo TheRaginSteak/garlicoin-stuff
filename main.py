@@ -16,8 +16,6 @@ def get_bool(prompt):
 
 PRINTING_VALUES = get_bool("Do you want to print garlicoin values? (Y/N) ")
 
-RECORD_TIME_FILE = get_bool("Do you want to write to a file for calculating GRLC/hr later? (Y/N) ")
-
 def main():
     if PRINTING_VALUES is True:
         garlicoin_balance_finder.main()

@@ -51,6 +51,12 @@ def value_dict():
                     value_dictionary[key] = 0.0
     return value_dictionary
 
+def our_total():
+    total = 0
+    for key, value in VALUE_DICTIONARY.items():
+        total += value
+    return total
+
 
 def record_balance(name, balance):
     """Records the balance into a .txt file for grlc/hr functionality"""
@@ -63,7 +69,7 @@ def record_balance(name, balance):
 def print_values():
     """Prints all the values for balances and Percentages"""
     PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
-    our_total = 0
+    total = our_total()
     names = []
     balances = []
     percentages = []
@@ -82,12 +88,11 @@ def print_values():
         i = i[0]
         print(names[i].capitalize() + " " + str(round(balances[i], 3)) +
               " Percentage of our supply: " + str(round(percentages[i], 3)) + "%")
-        our_total += balances[i]
         if PERCENT is True:
             print("Percentage of total supply: " + str(round(percentages_network[i], 5)) + "%\n")
         else:
             print()
-    print("Our garlic supply is: " + str(round(our_total, 3)))
+    print("Our garlic supply is: " + str(round(total, 3)))
     print("Total garlic supply is: " + str(round(float(
         url_value_finder("https://explorer.grlc-bakery.fun/ext/getmoneysupply")), 3)))
 

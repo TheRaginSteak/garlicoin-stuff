@@ -2,7 +2,7 @@
 Module to create graphs from garlicoin balances
 """
 import matplotlib.pyplot as plt
-from garlicoin_balance_finder import value_dict
+from garlicoin_balance_finder import value_dict, our_total
 
 def pie_chart():
     labels = []
@@ -22,6 +22,7 @@ def pie_chart():
     for i in range(len(sizes)):
         colors.append(USABLE_COLOURS[i])
 
+    plt.title("Our total supply is: " + str(round(our_total(), 3)))
     plt.pie(sizes, explode = explode, labels = labels, colors = colors, autopct = make_autopct(sizes))
     plt.axis("equal")
     plt.show()
