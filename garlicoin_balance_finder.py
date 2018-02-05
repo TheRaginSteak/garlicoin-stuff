@@ -52,6 +52,7 @@ def value_dict():
     return value_dictionary
 
 def our_total():
+    """A function to return our total GRLC supply"""
     total = 0
     for key, value in VALUE_DICTIONARY.items():
         total += value

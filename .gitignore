@@ -1,1 +1,5 @@
+# Folders to ignore
 __pycache__/
+
+# Filetypes to ignore
+*.png

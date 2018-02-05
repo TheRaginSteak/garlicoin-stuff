@@ -2,9 +2,13 @@
 Module to create graphs from garlicoin balances
 """
 import matplotlib.pyplot as plt
-from garlicoin_balance_finder import value_dict, our_total
+from time import strftime
+from garlicoin_balance_finder import value_dict, our_total, get_bool
 
 def pie_chart():
+    """Creates a pie chart and saves it to a file"""
+    SAVE_AS_FILE = get_bool("Do you want to save as a file? (Y/N) ")
+
     labels = []
     sizes = []
     explode = []
@@ -25,6 +29,8 @@ def pie_chart():
     plt.title("Our total supply is: " + str(round(our_total(), 3)))
     plt.pie(sizes, explode = explode, labels = labels, colors = colors, autopct = make_autopct(sizes))
     plt.axis("equal")
+    if SAVE_AS_FILE is True:
+        plt.savefig("charts/" + input("What file do you want to save to? ") + strftime(" %d.%m.%Y %H%M") +".png")
     plt.show()
 
 def make_autopct(sizes):
