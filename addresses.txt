@@ -1,5 +1,5 @@
 # The file that the other scripts will use for the addresses
-# The first word in a line is the label for the address and the second is the actual address
+# The first word in a line is the label for the addr ess and the second is the actual address
 harry GVex6fGdb13YwMRMMdFb2GawWv2nUikARY
 rubin GVkuokdmDEZ6rJYNJn2q99E93F8oYf8fTd
 seb GMeirLWrW34E2sRZ5jxJzkr31wCfWwgJuC
