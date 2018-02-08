@@ -51,13 +51,6 @@ def value_dict():
                     value_dictionary[key] = 0.0
     return value_dictionary
 
-def our_total():
-    """A function to return our total GRLC supply"""
-    total = 0
-    for key, value in VALUE_DICTIONARY.items():
-        total += value
-    return total
-
 
 def record_balance(name, balance):
     """Records the balance into a .txt file for grlc/hr functionality"""
@@ -70,19 +63,11 @@ def record_balance(name, balance):
 def print_values():
     """Prints all the values for balances and Percentages"""
     PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
-    total = our_total()
-    names = []
-    balances = []
-    percentages = []
-    for key, value in VALUE_DICTIONARY.items():
-        names.append(key)
-        balances.append(value)
-    for key, value in PERCENT_DICTIONARY_US.items():
-        percentages.append(value)
+    names = [key for key in VALUE_DICTIONARY]
+    balances = [value for key, value in VALUE_DICTIONARY.items()]
+    percentages = [value for key, value in PERCENT_DICTIONARY_US.items()]
     if PERCENT is True:
-        percentages_network = []
-        for key, value in percent_dict_network().items():
-            percentages_network.append(value)
+        percentages_network = [value for key, value in percent_dict_network().items()]
 
     print("\n")
     for i in enumerate(names):
@@ -93,7 +78,7 @@ def print_values():
             print("Percentage of total supply: " + str(round(percentages_network[i], 5)) + "%\n")
         else:
             print()
-    print("Our garlic supply is: " + str(round(total, 3)))
+    print("Our garlic supply is: " + str(round(OUR_TOTAL, 3)))
     print("Total garlic supply is: " + str(round(float(
         url_value_finder("https://explorer.grlc-bakery.fun/ext/getmoneysupply")), 3)))
 
@@ -101,24 +86,24 @@ def print_values():
 def percent_dict_us():
     """Creates a dictionary with the percentages of our supply"""
     percent_dictionary = {}
-    total_value = 0
     for key, value in VALUE_DICTIONARY.items():
-        total_value += value
-    for key, value in VALUE_DICTIONARY.items():
-        percent_dictionary[key] = value / total_value * 100
+        percent_dictionary[key] = value / OUR_TOTAL * 100
     return percent_dictionary
 
 
 def percent_dict_network():
     """Creates a dictionary with the percentages of the network"""
     percent_dictionary = {}
-    total_value = url_value_finder("https://explorer.grlc-bakery.fun/ext/getmoneysupply")
+    total_value_network = url_value_finder("https://explorer.grlc-bakery.fun/ext/getmoneysupply")
     for key, value in VALUE_DICTIONARY.items():
-        percent_dictionary[key] = value / float(total_value) * 100
+        percent_dictionary[key] = value / float(total_value_network) * 100
     return percent_dictionary
 
 
 VALUE_DICTIONARY = value_dict()
+
+global OUR_TOTAL
+OUR_TOTAL = sum(value for key,value in VALUE_DICTIONARY.items())
 
 PERCENT_DICTIONARY_US = percent_dict_us()
 
