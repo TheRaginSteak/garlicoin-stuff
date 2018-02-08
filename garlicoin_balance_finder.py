@@ -1,5 +1,6 @@
 """
 Script to find balances of garlicoin wallets and manipulate them
+globals created: VALUE_DICTIONARY, OUR_TOTAL, PERCENT_DICTIONARY_US
 """
 import urllib.request
 import time
@@ -99,12 +100,13 @@ def percent_dict_network():
         percent_dictionary[key] = value / float(total_value_network) * 100
     return percent_dictionary
 
-
+global VALUE_DICTIONARY
 VALUE_DICTIONARY = value_dict()
 
 global OUR_TOTAL
 OUR_TOTAL = sum(value for key,value in VALUE_DICTIONARY.items())
 
+global PERCENT_DICTIONARY_US
 PERCENT_DICTIONARY_US = percent_dict_us()
 
 def main():

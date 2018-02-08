@@ -1,9 +1,10 @@
 """
 Module to create graphs from garlicoin balances
+globals used: VALUE_DICTIONARY OUR_TOTAL
 """
 import matplotlib.pyplot as plt
 from time import strftime
-from garlicoin_balance_finder import value_dict, get_bool, OUR_TOTAL
+from garlicoin_balance_finder import VALUE_DICTIONARY, get_bool, OUR_TOTAL
 
 def pie_chart():
     """Creates a pie chart and saves it to a file"""
@@ -14,7 +15,7 @@ def pie_chart():
     explode = []
     colors = []
     USABLE_COLOURS = ["red", "orange", "yellow", "green", "blue", "indigo", "lightgreen", "lightblue", "gold"]
-    for key,value in value_dict().items():
+    for key,value in VALUE_DICTIONARY.items():
         if value > 0:
           labels.append(key.capitalize())
           sizes.append(value)
