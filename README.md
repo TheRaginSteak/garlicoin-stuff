@@ -1,10 +1,8 @@
 # garlicoin-stuff
 Garlicoin related program
 
-FINISHED:
-* Basic reading and outputting of balances
-* Calculating percentages of group total balance / total network balance
-* Pie charts
+addresses.txt
+put your name and your address on the same line with one space
 
-WIP:
-* Outputting a file based on time and calculating grlc/hr
+garlicoin_amount.txt
+will automatically be generated when running main
