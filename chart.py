@@ -7,7 +7,7 @@ import numpy as np
 from checker import VALUE_DICTIONARY, total_value, get_bool
 
 NAMES = [key.capitalize() for key,value in VALUE_DICTIONARY.items() if value > 0]
-BALANCES = [values for key,value in VALUE_DICTIONARY.items()values if value > 0]
+BALANCES = [value for key,value in VALUE_DICTIONARY.items() if value > 0]
 EXPLODE = [0.7 if i<10 else 0 for i in BALANCES]
 USABLE_COLOURS = ["red", "orange", "yellow", "green",
                   "blue", "indigo", "lightgreen", "lightblue", "gold"] * 2
