@@ -10,21 +10,17 @@ NAMES = []
 BALANCES = []
 EXPLODE = []
 COLORS = []
-USABLE_COLOURS = ["red", "orange", "yellow", "green", "blue", "indigo", "lightgreen", "lightblue", "gold"]
+USABLE_COLOURS = ["red", "orange", "yellow", "green", "blue", "indigo", "lightgreen", "lightblue", "gold", "red", "orange", "yellow", "green", "blue", "indigo", "lightgreen", "lightblue", "gold"]
 SAVE_AS_FILE = None
 
+
 def general_values():
+    """Creates all the values that the charts need"""
     SAVE_AS_FILE = get_bool("Do you want to save as a file? (Y/N) ")
 
     for key, value in VALUE_DICTIONARY.items():
         NAMES.append(key.capitalize())
         BALANCES.append(value)
-
-    for size in BALANCES:
-        if size < 10:
-            EXPLODE.append(0.4)
-        else:
-            EXPLODE.append(0)
 
     for i in range(len(BALANCES)):
         COLORS.append(USABLE_COLOURS[i])
@@ -32,9 +28,17 @@ def general_values():
 
 def pie_chart():
     """Creates a pie chart and saves it to a file"""
+    for i in BALANCES:
+        if i == 0:
+            NAMES.pop(BALANCES.index(i))
+            BALANCES.remove(i)
 
-
-
+    for size in BALANCES:
+        if size < 10:
+            EXPLODE.append(0.4)
+        else:
+            EXPLODE.append(0)
+        
     plt.title("Our total supply is: " + str(round(OUR_TOTAL, 3)))
     plt.pie(BALANCES, explode = EXPLODE, labels = NAMES, colors = COLORS, autopct = make_autopct(BALANCES))
     plt.axis("equal")
@@ -46,6 +50,7 @@ def pie_chart():
 def bar_chart():
     return
 
+
 def make_autopct(sizes):
     def my_autopct(pct):
         total = sum(sizes)
@@ -53,10 +58,11 @@ def make_autopct(sizes):
         return("{p:.2f}% ({v:d})".format(p = pct, v = val))
     return my_autopct
 
+
 def main():
     general_values()
     while True:
-        chart_type = input("Do you want a bar chart or a pie chart?")
+        chart_type = input("Do you want a bar chart or a pie chart? ").lower()
         if chart_type == "pie":
             pie_chart()
             return
@@ -65,4 +71,3 @@ def main():
             return
         else:
             print("Please enter a valid value")
-
