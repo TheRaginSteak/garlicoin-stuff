@@ -1,4 +1,4 @@
-import urllib.request, calendar, time, matplotlib.pyplot as plt
+import urllib.request
 
 USER_AGENT = \
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
@@ -67,33 +67,13 @@ def print_values():
     print("Our garlic supply is: " + str(round(total_value, 3)))
     print("Total garlic supply is:",float(network_value))
 
-    if CHART is True:
-        pie_chart()
-
-    if RECORD_TIME_FILE is True:
+    if RECORD_TIME_FILE:
         record_balance()
 
-def pie_chart():
-    labels = [key.capitalize() for key,value in VALUE_DICTIONARY.items() if value > 0]
-    sizes = [value for key,value in VALUE_DICTIONARY.items() if value > 0]
-    explode = [0.7 if i<10 else 0 for i in sizes]
-    usable_colours = ["red","orange","yellow","green","blue","indigo","lightgreen","lightblue","gold"]
-    colors = [usable_colours[i] for i in range(len(sizes))]
 
-    def make_autopct(sizes):
-        def my_autopct(pct):
-            total = sum(sizes)
-            val = int(round(pct*total/100))
-            return("{p:.2f}% ({v:d})".format(p=pct,v=val))
-        return my_autopct
-
-    plt.pie(sizes,explode=explode,labels=labels,colors=colors,autopct=make_autopct(sizes))
-    plt.axis("equal")
-    plt.show()
 
 PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
 RECORD_TIME_FILE = get_bool("Do you want to write to a file for calculating GRLC/hr later? (Y/N) ")
-CHART = get_bool("Do you want a pie chart? (Y/N) ")
 
-if __name__ == "__main__":
+def main:
     print_values()
