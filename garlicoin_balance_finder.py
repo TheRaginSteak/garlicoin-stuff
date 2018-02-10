@@ -45,11 +45,11 @@ def value_dict():
         value_dictionary[key] = 0.0
     for key, value in url_dictionary.items():
         for i in enumerate(value):
-                i = i[0]
-                try:
-                    value_dictionary[key] += float(url_value_finder(value[i]))
-                except ValueError:
-                    value_dictionary[key] = 0.0
+            i = i[0]
+            try:
+                value_dictionary[key] += float(url_value_finder(value[i]))
+            except ValueError:
+                value_dictionary[key] = 0.0
     return value_dictionary
 
 
@@ -63,11 +63,11 @@ def record_balance(name, balance):
 
 def print_values():
     """Prints all the values for balances and Percentages"""
-    PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
+    percent = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
     names = [key for key in VALUE_DICTIONARY]
     balances = [value for key, value in VALUE_DICTIONARY.items()]
     percentages = [value for key, value in PERCENT_DICTIONARY_US.items()]
-    if PERCENT is True:
+    if percent is True:
         percentages_network = [value for key, value in percent_dict_network().items()]
 
     print("\n")
@@ -75,7 +75,7 @@ def print_values():
         i = i[0]
         print(names[i].capitalize() + " " + str(round(balances[i], 3)) +
               " Percentage of our supply: " + str(round(percentages[i], 3)) + "%")
-        if PERCENT is True:
+        if percent is True:
             print("Percentage of total supply: " + str(round(percentages_network[i], 5)) + "%\n")
         else:
             print()
@@ -100,14 +100,12 @@ def percent_dict_network():
         percent_dictionary[key] = value / float(total_value_network) * 100
     return percent_dictionary
 
-global VALUE_DICTIONARY
 VALUE_DICTIONARY = value_dict()
 
-global OUR_TOTAL
-OUR_TOTAL = sum(value for key,value in VALUE_DICTIONARY.items())
+OUR_TOTAL = sum(value for key, value in VALUE_DICTIONARY.items())
 
-global PERCENT_DICTIONARY_US
 PERCENT_DICTIONARY_US = percent_dict_us()
 
 def main():
+    """Runs the functions"""
     print_values()
