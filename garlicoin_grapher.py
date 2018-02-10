@@ -2,6 +2,7 @@
 Module to create graphs from garlicoin balances
 globals used: VALUE_DICTIONARY OUR_TOTAL
 """
+import datetime
 from time import strftime
 import matplotlib.pyplot as plt
 import numpy as np
@@ -62,6 +63,24 @@ def bar_chart():
                     + strftime(" %d.%m.%Y %H%M") +"Bar Chart.png")
     plt.show()
 
+def line_graph():
+    with open("garlic_amounts.txt", "r") as grlc_file:
+        data = grlc_file.read().split("\n\n")
+        big_list = []
+        for i in data:
+            big_list.append(i.split("\n"))
+        big_list[-1].remove("")
+        datetimes = [datetime.datetime.fromtimestamp(float(i[0])) for i in big_list]
+        num = 1
+        for i in big_list:
+            values = [i[num].split()[1] for i in big_list]
+            plt.plot(datetimes, values, linewidth=2.0, label=i[num].split()[0])
+            num += 1
+            print(i[num].split()[0])
+        plt.ylabel("garlicoin")
+        plt.xlabel("time")
+        plt.legend()
+        plt.show()
 
 def make_autopct(sizes):
     """Automatic percentages"""
@@ -77,12 +96,15 @@ def main():
     """Runs all the functions"""
     general_values()
     while True:
-        chart_type = input("Do you want a bar chart or a pie chart? ").lower()
+        chart_type = input("Do you want a bar chart, a pie chart or a line graph? ").lower()
         if chart_type == "pie":
             pie_chart()
             return
         elif chart_type == 'bar':
             bar_chart()
+            return
+        elif chart_type == 'line':
+            line_graph()
             return
         else:
             print("Please enter a valid value")

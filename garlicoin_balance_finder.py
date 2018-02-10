@@ -4,6 +4,7 @@ globals created: VALUE_DICTIONARY, OUR_TOTAL, PERCENT_DICTIONARY_US
 """
 import urllib.request
 import time
+import calendar
 
 def get_bool(prompt):
     """A simple function to get boolean options"""
@@ -53,12 +54,12 @@ def value_dict():
     return value_dictionary
 
 
-def record_balance(name, balance):
+def record_balance():
     """Records the balance into a .txt file for grlc/hr functionality"""
-    person_value = name + " " + str(balance)
-    with open(time.time() + " GRLC balances.txt", 'a') as time_file:
-        time_file.write(person_value)
-    return 1
+    with open("garlic_amounts.txt", "a") as grlc_file:
+        grlc_file.write("\n" + str(calendar.timegm(time.gmtime())) + "\n")
+        for key, value in VALUE_DICTIONARY.items():
+            grlc_file.write(key + " " + str(value)+"\n")
 
 
 def print_values():
@@ -109,3 +110,5 @@ PERCENT_DICTIONARY_US = percent_dict_us()
 def main():
     """Runs the functions"""
     print_values()
+    if get_bool("Do you want to record the balances for later? (Y/N) ") is True:
+        record_balance()
