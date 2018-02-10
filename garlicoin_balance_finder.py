@@ -56,7 +56,7 @@ def value_dict():
 def record_balance(name, balance):
     """Records the balance into a .txt file for grlc/hr functionality"""
     person_value = name + " " + str(balance)
-    with open(time.time() +" GRLC balances.txt", 'a') as time_file:
+    with open(time.time() + " GRLC balances.txt", 'a') as time_file:
         time_file.write(person_value)
     return 1
 

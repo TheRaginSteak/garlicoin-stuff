@@ -2,27 +2,18 @@
 Runs all the modules
 """
 
-import garlicoin_balance_finder
-import garlicoin_grapher
+import garlicoin_balance_finder as grlc_balance
+import garlicoin_grapher as grlc_grapher
 
-def get_bool(prompt):
-    """A simple function to get boolean options"""
-    while True:
-        try:
-            return {"true":True, "false":False, "y":True, "n":False}[input(prompt).lower()]
-        except KeyError:
-            print("Invalid input")
-
-
-PRINTING_VALUES = get_bool("Do you want to print garlicoin values? (Y/N) ")
+PRINTING_VALUES = grlc_balance.get_bool("Do you want to print garlicoin values? (Y/N) ")
 
 def main():
     if PRINTING_VALUES is True:
-        garlicoin_balance_finder.main()
+        grlc_balance.main()
 
-    CHART = get_bool("Do you want a pie chart? (Y/N) ")
+    CHART = grlc_balance.get_bool("Do you want a chart? (Y/N) ")
     if CHART is True:
-        garlicoin_grapher.main()
+        grlc_grapher.main()
 
 if __name__ == '__main__':
     main()
