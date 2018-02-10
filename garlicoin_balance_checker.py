@@ -75,5 +75,5 @@ def print_values():
 PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
 RECORD_TIME_FILE = get_bool("Do you want to write to a file for calculating GRLC/hr later? (Y/N) ")
 
-def main:
+def main():
     print_values()
