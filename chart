@@ -1,43 +1,21 @@
 """
 Module to create graphs from garlicoin balances
-globals used: VALUE_DICTIONARY OUR_TOTAL
 """
 from time import strftime
 import matplotlib.pyplot as plt
 import numpy as np
-from garlicoin_balance_finder import VALUE_DICTIONARY, OUR_TOTAL, get_bool
+from checker import VALUE_DICTIONARY, total_value, get_bool
 
-NAMES = []
-BALANCES = []
-EXPLODE = []
-COLORS = []
+NAMES = [key.capitalize() for key,value in VALUE_DICTIONARY.items() if value > 0]
+BALANCES = [values for key,value in VALUE_DICTIONARY.items()values if value > 0]
+EXPLODE = [0.7 if i<10 else 0 for i in BALANCES]
 USABLE_COLOURS = ["red", "orange", "yellow", "green",
                   "blue", "indigo", "lightgreen", "lightblue", "gold"] * 2
-
-def general_values():
-    """Creates all the values that the charts need"""
-    for key, value in VALUE_DICTIONARY.items():
-        NAMES.append(key.capitalize())
-        BALANCES.append(value)
-
-    for i in range(len(BALANCES)):
-        COLORS.append(USABLE_COLOURS[i])
-
+COLORS = [USABLE_COLOURS[i] for i in range(len(BALANCES))]
 
 def pie_chart():
     """Creates a pie chart and saves it to a file"""
     save_as_file = get_bool("Do you want to save as a file? (Y/N) ")
-
-    for i in BALANCES:
-        if i == 0:
-            NAMES.pop(BALANCES.index(i))
-            BALANCES.remove(i)
-
-    for size in BALANCES:
-        if size < 10:
-            EXPLODE.append(0.4)
-        else:
-            EXPLODE.append(0)
 
     plt.title("Our total supply is: " + str(round(OUR_TOTAL, 3)))
     plt.pie(BALANCES, explode=EXPLODE, labels=NAMES, colors=COLORS, autopct=make_autopct(BALANCES))
@@ -74,7 +52,6 @@ def make_autopct(sizes):
 
 def main():
     """Runs all the functions"""
-    general_values()
     while True:
         chart_type = input("Do you want a bar chart or a pie chart? ").lower()
         if chart_type == "pie":
