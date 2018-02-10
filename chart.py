@@ -17,7 +17,7 @@ def pie_chart():
     """Creates a pie chart and saves it to a file"""
     save_as_file = get_bool("Do you want to save as a file? (Y/N) ")
 
-    plt.title("Our total supply is: " + str(round(OUR_TOTAL, 3)))
+    plt.title("Our total supply is: " + str(round(total_value, 3)))
     plt.pie(BALANCES, explode=EXPLODE, labels=NAMES, colors=COLORS, autopct=make_autopct(BALANCES))
     plt.axis("equal")
     if save_as_file is True:
@@ -32,7 +32,7 @@ def bar_chart():
     save_as_file = get_bool("Do you want to save as a file? (Y/N) ")
     range_of_values = np.arange(len(BALANCES))
 
-    plt.title("Our total supply is: " + str(round(OUR_TOTAL, 3)))
+    plt.title("Our total supply is: " + str(round(total_value, 3)))
     plt.bar(range_of_values, BALANCES, color=COLORS)
     plt.xticks(range_of_values, NAMES)
     if save_as_file is True:

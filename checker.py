@@ -1,4 +1,4 @@
-import urllib.request
+import urllib.request, calendar, time, datetime
 
 USER_AGENT = \
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7"
@@ -43,7 +43,7 @@ def value_dict():
 
 VALUE_DICTIONARY = value_dict()
 total_value = sum(value for key,value in VALUE_DICTIONARY.items())
-percent_list = [(value/total_value*100) for key,value in VALUE_DICTIONARY.items()]
+percent_list = [((value/total_value)*100) for key,value in VALUE_DICTIONARY.items()]
 network_value = url_value_finder("https://explorer.grlc-bakery.fun/ext/getmoneysupply")
 network_percentages = [value / float(network_value) * 100 for key,value in VALUE_DICTIONARY.items()]
 
