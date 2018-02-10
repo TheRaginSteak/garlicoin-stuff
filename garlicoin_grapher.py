@@ -71,7 +71,17 @@ def make_autopct(sizes):
         val = int(round(pct * total / 100))
         return "{p:.2f}% ({v:d})".format(p=pct, v=val)
     return my_autopct
-
+  
+def record_balance():
+    """Used for line graphs"""
+    file = open("garlic_amounts.txt","a")
+    file.write("\n")
+    file.write(str(calendar.timegm(time.gmtime())))
+    file.write("\n")
+    for key,value in VALUE_DICTIONARY.items():
+        file.write(key+" "+str(value)+"\n")
+    file.close()
+   
 
 def main():
     """Runs all the functions"""
@@ -86,3 +96,4 @@ def main():
             return
         else:
             print("Please enter a valid value")
+    record_balance()
