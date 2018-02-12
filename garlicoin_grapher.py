@@ -64,6 +64,7 @@ def bar_chart():
     plt.show()
 
 def line_graph():
+    """Creates a line graph with all of the past balances"""
     with open("garlic_amounts.txt", "r") as grlc_file:
         data = grlc_file.read().split("\n\n")
         big_list = []

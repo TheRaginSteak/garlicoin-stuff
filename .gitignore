@@ -3,3 +3,6 @@ __pycache__/
 
 # Filetypes to ignore
 *.png
+
+# Files to ignore
+garlic_amounts.txt

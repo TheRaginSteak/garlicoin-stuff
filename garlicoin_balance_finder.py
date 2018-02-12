@@ -110,5 +110,4 @@ PERCENT_DICTIONARY_US = percent_dict_us()
 def main():
     """Runs the functions"""
     print_values()
-    if get_bool("Do you want to record the balances for later? (Y/N) ") is True:
-        record_balance()
+    record_balance()
