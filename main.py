@@ -7,9 +7,7 @@ import chart as grlc_grapher
 import line_graph as grlc_line
 
 def main():
-    PRINTING_VALUES = grlc_balance.get_bool("Do you want to print garlicoin values? (Y/N) ")
-    if PRINTING_VALUES is True:
-        grlc_balance.main()
+    grlc_balance.main()
 
     CHART = grlc_balance.get_bool("Do you want a chart? (Y/N) ")
     if CHART:

@@ -18,5 +18,4 @@ def main():
     plt.legend()
     plt.show()
     file.close()
-main()
 

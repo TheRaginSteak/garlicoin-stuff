@@ -46,6 +46,8 @@ total_value = sum(value for key,value in VALUE_DICTIONARY.items())
 percent_list = [((value/total_value)*100) for key,value in VALUE_DICTIONARY.items()]
 network_value = url_value_finder("https://explorer.grlc-bakery.fun/ext/getmoneysupply")
 network_percentages = [value / float(network_value) * 100 for key,value in VALUE_DICTIONARY.items()]
+PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
+RECORD_TIME_FILE = get_bool("Do you want to write to a file for calculating GRLC/hr later? (Y/N) ")
 
 def record_balance():
     file = open("garlic_amounts.txt","a")
@@ -60,20 +62,14 @@ def print_values():
     names = [key.capitalize() for key,value in VALUE_DICTIONARY.items()]
     balances = [value for key,value in VALUE_DICTIONARY.items()]
     things=[str(names[position])+": "+str(round(balances[position],3))+"\nPercentage of our supply: "+str(round(percent_list[position],3))+
-           "%\n" + "Percentage of total supply: " + str(round(network_percentages[position],3)) + "%\n" if PERCENT else str(names[position])+": "+str(round(balances[position],3))+
-           "%\nPercentage of our supply: "+str(round(percent_list[position],3)) + "%\n" for position,value in enumerate(names)]
+           "\n" + "Percentage of our supply: " + str(round(network_percentages[position],3)) + "%\n" if PERCENT else str(names[position])+": "+str(round(balances[position],3))+
+           "\nPercentage of our supply: "+str(round(percent_list[position],3)) + "%\n" for position,value in enumerate(names)]
     for i in things:
         print(i)
     print("Our garlic supply is: " + str(round(total_value, 3)))
     print("Total garlic supply is:",float(network_value))
 
-    if RECORD_TIME_FILE:
-        record_balance()
-
-
-
-PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
-RECORD_TIME_FILE = get_bool("Do you want to write to a file for calculating GRLC/hr later? (Y/N) ")
-
 def main():
     print_values()
+    if RECORD_TIME_FILE:
+        record_balance()
