@@ -17,8 +17,11 @@ USABLE_COLOURS = ["red", "orange", "yellow", "green",
 def general_values():
     """Creates all the values that the charts need"""
     for key, value in VALUE_DICTIONARY.items():
-        NAMES.append(key.capitalize())
-        BALANCES.append(value)
+        if value == 0:
+            continue
+        else:
+            NAMES.append(key.capitalize())
+            BALANCES.append(value)
 
     for i in range(len(BALANCES)):
         COLORS.append(USABLE_COLOURS[i])
