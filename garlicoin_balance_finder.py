@@ -51,7 +51,8 @@ def value_dict():
                 value_dictionary[key] += float(url_value_finder(value[i]))
             except ValueError:
                 value_dictionary[key] = 0.0
-    return value_dictionary
+    value_dictionary_sorted = sorted(value_dictionary, key=value_dictionary.get)
+    return value_dictionary_sorted
 
 
 def record_balance():
