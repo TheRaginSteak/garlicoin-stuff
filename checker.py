@@ -46,8 +46,6 @@ total_value = sum(value for key,value in VALUE_DICTIONARY.items())
 percent_list = [((value/total_value)*100) for key,value in VALUE_DICTIONARY.items()]
 network_value = url_value_finder("https://explorer.grlc-bakery.fun/ext/getmoneysupply")
 network_percentages = [value / float(network_value) * 100 for key,value in VALUE_DICTIONARY.items()]
-PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
-RECORD_TIME_FILE = get_bool("Do you want to write to a file for calculating GRLC/hr later? (Y/N) ")
 
 def record_balance():
     file = open("garlic_amounts.txt","a")
@@ -58,11 +56,11 @@ def record_balance():
         file.write(key+" "+str(value)+"\n")
     file.close()
 
-def print_values():
+def print_values(boolean):
     names = [key.capitalize() for key,value in VALUE_DICTIONARY.items()]
     balances = [value for key,value in VALUE_DICTIONARY.items()]
     things=[str(names[position])+": "+str(round(balances[position],3))+"\nPercentage of our supply: "+str(round(percent_list[position],3))+
-           "\n" + "Percentage of our supply: " + str(round(network_percentages[position],3)) + "%\n" if PERCENT else str(names[position])+": "+str(round(balances[position],3))+
+           "\n" + "Percentage of our supply: " + str(round(network_percentages[position],3)) + "%\n" if boolean else str(names[position])+": "+str(round(balances[position],3))+
            "\nPercentage of our supply: "+str(round(percent_list[position],3)) + "%\n" for position,value in enumerate(names)]
     for i in things:
         print(i)
@@ -70,6 +68,8 @@ def print_values():
     print("Total garlic supply is:",float(network_value))
 
 def main():
-    print_values()
+    PERCENT = get_bool("Do you want to view your wallet's percentage of the network? (Y/N) ")
+    RECORD_TIME_FILE = get_bool("Do you want to write to a file for calculating GRLC/hr later? (Y/N) ")
+    print_values(PERCENT)
     if RECORD_TIME_FILE:
         record_balance()
