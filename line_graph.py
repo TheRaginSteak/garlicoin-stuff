@@ -7,12 +7,12 @@ def main():
     for i in data:
         big_list.append(i.split("\n"))
     big_list[-1].remove("")
-    datetimes= [datetime.datetime.fromtimestamp(float(i[0])) for i in big_list]
-    num = 1
-    for i in big_list:
-        values = [float(i[num].split()[1]) for i in big_list]
-        plt.plot(datetimes, values,linewidth=2.0, label=i[num].split()[0])
-        num += 1
+    names = [str(i.split()[0]) for i in big_list[0] if i.split()[0].isalpha()]
+    datetimes = [datetime.datetime.fromtimestamp(float(i[0])) for i in big_list]
+    raw_values = [[float(item[num].split()[1]) for num in range(1,len(big_list[0]))] for item in big_list]
+    values = list(zip(*raw_values))
+    for i in range(len(values)):
+        plt.plot(datetimes,values[i],label=names[i])
     plt.ylabel("garlicoin")
     plt.xlabel("time")
     plt.legend()
