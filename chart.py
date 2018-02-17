@@ -6,23 +6,28 @@ import matplotlib.pyplot as plt
 import numpy as np
 from checker import VALUE_DICTIONARY, total_value, get_bool
 
-NAMES = [key.capitalize() for key,value in VALUE_DICTIONARY.items() if value > 0]
-BALANCES = [value for key,value in VALUE_DICTIONARY.items() if value > 0]
+NAMES = [key.capitalize() for key,value in VALUE_DICTIONARY.items() if round(value) > 0]
+BALANCES = [value for key,value in VALUE_DICTIONARY.items() if round(value) > 0]
 EXPLODE = [0.7 if i<10 else 0 for i in BALANCES]
-USABLE_COLOURS = ["red", "orange", "yellow", "green",
-                  "blue", "indigo", "lightgreen", "lightblue", "gold"] * 2
-COLORS = [USABLE_COLOURS[i] for i in range(len(BALANCES))]
+
+def save(chart_type):
+    if chart_type == "pie":
+        plt.savefig("charts/" + input("What file do you want to save to? ")
+                    + strftime(" %d.%m.%Y %H %M") +" Pie Chart.png")
+    else:
+        plt.savefig("charts/" + input("What file do you want to save to? ")
+                    + strftime(" %d.%m.%Y %H %M") +"Bar Chart.png")        
+        
 
 def pie_chart():
     """Creates a pie chart and saves it to a file"""
     save_as_file = get_bool("Do you want to save as a file? (Y/N) ")
 
     plt.title("Our total supply is: " + str(round(total_value, 3)))
-    plt.pie(BALANCES, explode=EXPLODE, labels=NAMES, colors=COLORS, autopct=make_autopct(BALANCES))
+    plt.pie(BALANCES, explode=EXPLODE, labels=NAMES, autopct=make_autopct(BALANCES))
     plt.axis("equal")
     if save_as_file is True:
-        plt.savefig("charts/" + input("What file do you want to save to? ")
-                    + strftime(" %d.%m.%Y %H%M") +" Pie Chart.png")
+        save("pie")
     plt.show()
 
 
@@ -33,11 +38,10 @@ def bar_chart():
     range_of_values = np.arange(len(BALANCES))
 
     plt.title("Our total supply is: " + str(round(total_value, 3)))
-    plt.bar(range_of_values, BALANCES, color=COLORS)
+    plt.bar(range_of_values, BALANCES)
     plt.xticks(range_of_values, NAMES)
     if save_as_file is True:
-        plt.savefig("charts/" + input("What file do you want to save to? ")
-                    + strftime(" %d.%m.%Y %H%M") +"Bar Chart.png")
+        save("bar")
     plt.show()
 
 
