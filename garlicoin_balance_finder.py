@@ -51,6 +51,7 @@ def value_dict():
                 value_dictionary[key] += float(url_value_finder(value[i]))
             except ValueError:
                 value_dictionary[key] = 0.0
+                
     value_dictionary_sorted = {}
     for i in sorted(value_dictionary, key=value_dictionary.get, reverse=True):
         """ this statement gets the sorted keys, then gets the index of the key and gets
