@@ -100,13 +100,13 @@ def print_values():
     for i in enumerate(names):
         i = i[0]
         print(names[i].capitalize() + " " + str(round(balances[i], 3)) +
-              " Monetary Value: " + str(round(money_balances[i], 3)) +
-              "$ Percentage of our supply: " + str(round(percentages[i], 3)) + "%")
+              " Monetary Value: $" + str(round(money_balances[i], 2)) +
+              " Percentage of our supply: " + str(round(percentages[i], 3)) + "%")
         if percent is True:
             print("Percentage of total supply: " + str(round(percentages_network[i], 5)) + "%\n")
         else:
             print()
-    print("Current GRLC value (Coin Market Cap) is: " + str(round(GRLC_VALUE, 2)) + "$")
+    print("Current GRLC value (Coin Market Cap) is: $" + str(round(GRLC_VALUE, 2)))
     print("Our garlic supply is: " + str(round(OUR_TOTAL, 3)))
     print("Total garlic supply is: " + str(round(float(
         url_value_finder("https://explorer.grlc-bakery.fun/ext/getmoneysupply")), 3)))
