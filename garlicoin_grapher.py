@@ -11,9 +11,6 @@ from garlicoin_balance_finder import VALUE_DICTIONARY, OUR_TOTAL, get_bool
 NAMES = []
 BALANCES = []
 EXPLODE = []
-COLORS = []
-USABLE_COLOURS = ["red", "orange", "yellow", "green",
-                  "blue", "indigo", "lightgreen", "lightblue", "gold"] * 2
 
 def general_values():
     """Creates all the values that the charts need"""
@@ -23,9 +20,6 @@ def general_values():
         else:
             NAMES.append(key.capitalize())
             BALANCES.append(value)
-
-    for i in range(len(BALANCES)):
-        COLORS.append(USABLE_COLOURS[i])
 
 
 def pie_chart():
@@ -44,7 +38,7 @@ def pie_chart():
             EXPLODE.append(0)
 
     plt.title("Our total supply is: " + str(round(OUR_TOTAL, 3)))
-    plt.pie(BALANCES, explode=EXPLODE, labels=NAMES, colors=COLORS, autopct=make_autopct(BALANCES))
+    plt.pie(BALANCES, explode=EXPLODE, labels=NAMES, autopct=make_autopct(BALANCES))
     plt.axis("equal")
     if save_as_file is True:
         plt.savefig("charts/" + input("What file do you want to save to? ")
@@ -59,7 +53,7 @@ def bar_chart():
     range_of_values = np.arange(len(BALANCES))
 
     plt.title("Our total supply is: " + str(round(OUR_TOTAL, 3)))
-    plt.bar(range_of_values, BALANCES, color=COLORS)
+    plt.bar(range_of_values, BALANCES)
     plt.xticks(range_of_values, NAMES)
     if save_as_file is True:
         plt.savefig("charts/" + input("What file do you want to save to? ")
