@@ -100,7 +100,7 @@ def print_values():
     for i in enumerate(names):
         i = i[0]
         print(names[i].capitalize() + " " + str(round(balances[i], 3)) +
-              "GRLC Monetary Value: $" + str(round(money_balances[i], 2)) +
+              " GRLC Monetary Value: $" + str(round(money_balances[i], 2)) +
               " Percentage of our supply: " + str(round(percentages[i], 3)) + "%")
         if percent is True:
             print("Percentage of total supply: " + str(round(percentages_network[i], 5)) + "%\n")
