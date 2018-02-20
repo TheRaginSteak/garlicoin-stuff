@@ -60,7 +60,7 @@ def print_values(boolean):
     names = [key.capitalize() for key,value in VALUE_DICTIONARY.items()]
     balances = [value for key,value in VALUE_DICTIONARY.items()]
     things=[str(names[position])+": "+str(round(balances[position],3))+"\nPercentage of our supply: "+str(round(percent_list[position],3))+
-           "\n" + "Percentage of our supply: " + str(round(network_percentages[position],3)) + "%\n" if boolean else str(names[position])+": "+str(round(balances[position],3))+
+           "%\n" + "Percentage of total supply: " + str(round(network_percentages[position],3)) + "%\n" if boolean else str(names[position])+": "+str(round(balances[position],3))+
            "\nPercentage of our supply: "+str(round(percent_list[position],3)) + "%\n" for position,value in enumerate(names)]
     for i in things:
         print(i)
